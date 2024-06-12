@@ -1,5 +1,9 @@
-﻿using System;
-using Library;
+﻿//MARCO A. SANTOLIN -- 198769
+//GIULIANO C. LAGNI -- 199805
+
+
+using System;
+
 
 namespace OOPproject
 {
@@ -9,12 +13,6 @@ namespace OOPproject
         {
             Console.WriteLine("Hello World!");
 
-            Book livro1 = new Book("O Senhor dos Anéis", "J.R.R. Tolkien", "HarperCollins", 1216, 100);
-
-            livro1.showInfo();
-
-            Book livro2 = new Book();
-            livro2.showInfo();
         }
     }
 }
