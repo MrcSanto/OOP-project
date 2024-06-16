@@ -18,5 +18,17 @@
             this.telefone = telefone;
             this.nacionalidade = nacionalidade;
         }
+
+        public string getRazaoSocial() {  return razao_social; }
+        public void setRazaoSocial(string razao_social) { this.razao_social = razao_social; }
+
+        public string getNomeFantasia() {   return nome_fantasia; }
+        public void setNomeFantasia(string nome_fantasia) { this.nome_fantasia=nome_fantasia; }
+
+        public string getCNPJ() { return CNPJ; }
+        public void setCNPJ(string CNPJ) {  this.CNPJ = CNPJ; }
+
+        public string getTelefone() { return telefone; }
+        public void setTelefone(string telefone) { this.telefone = telefone; }
     }
 }
