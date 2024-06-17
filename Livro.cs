@@ -5,7 +5,7 @@ namespace OOPproject
     class Livro
     {
         private string titulo;
-        private Autor autor; //agregação por composição
+        private Autor autor;  //agregação por composição
         private Editora editora; //agregação 
         private int n_paginas;
         private int disponiveis;
@@ -19,7 +19,7 @@ namespace OOPproject
             this.disponiveis = disponiveis;
         }
 
-        public string getTitulo() {  return titulo; }
+        public string getTitulo() { return titulo; }
         public void setTitulo(string titulo) { this.titulo = titulo; }
 
         public Autor getAutor() { return autor; }
@@ -31,7 +31,11 @@ namespace OOPproject
         public int getDisponiveis() { return disponiveis; }
         public void setDisponiveis(int disponiveis) { this.disponiveis = disponiveis; }
 
-
+        public void addCopias(int number)
+        {
+            disponiveis += number;
+            Console.WriteLine($"Adicionado {number} novos livros. Nome: {titulo}. Total agora: {disponiveis}");
+        }
 
     }
 }
