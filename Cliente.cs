@@ -15,7 +15,7 @@ namespace OOPproject
         public Cliente() { }
 
         public Cliente(string nome, string sexo, DateTime dt_nascimento, string cPF, Endereco endereco, string email, string cEP, string telefone) 
-        {
+                : base(nome, sexo, dt_nascimento){
             CPF = cPF;
             this.endereco = endereco;
             this.email = email;
@@ -40,51 +40,41 @@ namespace OOPproject
 
         public override void registrar(List<Pessoa> pessoas)
         {
-            string texto;
-            Console.Write("Digite o nome do cliente: ");
-            texto = Console.ReadLine();
-            setNome(texto);
-
-            Console.Write("Digite o sexo do cliente: ");
-            texto = Console.ReadLine();
-            setSexo(texto);
-
-            Console.Write("Digite a data de nascimento do cliente (dd/MM/yyyy): ");
-            texto = Console.ReadLine();
-            if (DateTime.TryParseExact(texto, "dd/MM/yyyy", null, DateTimeStyles.None, out DateTime dataNascimento))
-            {
-                setDt_nascimento(dataNascimento);
-            }
-            else
-            {
-                Console.WriteLine("Formato de data inválido. Tente novamente.");
-                return;
-            }
-
-            Console.Write("Digite o CPF do cliente: ");
-            texto = Console.ReadLine();
-            setCPF(texto);
+            setNome(ObterEntrada("Digite o nome do cliente: "));
+            setSexo(ObterEntrada("Digite o sexo do cliente: "));
+            setDt_nascimento(ObterDataNascimento("Digite a data de nascimento: "));
+            setCPF(ObterEntrada("Digite o CPF: "));
 
             // Cadastrando o endereço
             Endereco end = Endereco.CadastrarEndereco();
             setEndereco(endereco);
 
-            Console.Write("Digite o email do cliente: ");
-            texto = Console.ReadLine();
-            setEmail(texto);
-
-            Console.Write("Digite o CEP do cliente: ");
-            texto = Console.ReadLine();
-            setCEP(texto);
-
-            Console.Write("Digite o telefone do cliente: ");
-            texto = Console.ReadLine();
-            setTelefone(texto);
-
+            setEmail(ObterEntrada("Digite o email: "));
+            setCEP(ObterEntrada("Digite o CEP: "));
+            setTelefone(ObterEntrada("Digite o telefone: "));
             pessoas.Add(this);
 
         }
 
+        private string ObterEntrada(string mensagem)
+        {
+            Console.Write(mensagem);
+            return Console.ReadLine();
+        }
 
+        private DateTime ObterDataNascimento(string mensagem)
+        {
+            DateTime dataNascimento;
+            while (true)
+            {
+                Console.Write(mensagem);
+                string entrada = Console.ReadLine();
+                if (DateTime.TryParseExact(entrada, "dd/MM/yyyy", null, DateTimeStyles.None, out dataNascimento))
+                {
+                    return dataNascimento;
+                }
+                Console.WriteLine("Formato de data inválido. Tente novamente.");
+            }
+        }
     }
 }   

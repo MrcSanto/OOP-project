@@ -9,7 +9,7 @@ class Autor : Pessoa //sintaxe para herdar uma classe
 
     public Autor() { }
 
-    public Autor(string nome, string sexo, DateTime dt_nascimento, string nacionalidade)
+    public Autor(string nome, string sexo, DateTime dt_nascimento, string nacionalidade) : base(nome, sexo, dt_nascimento)
     {
         this.nacionalidade = nacionalidade;
     }

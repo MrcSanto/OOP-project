@@ -12,8 +12,7 @@ namespace OOPproject
             List<Livro> Jausten = new List<Livro>();
             List<Livro> Ltolstoy = new List<Livro>();
             List<Livro> livros = new List<Livro>();
-            List<Pessoa> pessoas = new List<Pessoa>();
-            List<Cliente> clientes = new List<Cliente>();   
+            List<Pessoa> pessoas = new List<Pessoa>();  
 
             Endereco e1 = new Endereco("Rua A", 333, "Bairro C");
             Endereco e2 = new Endereco("Rua B", 343, "Bairro C");
@@ -24,16 +23,11 @@ namespace OOPproject
             DateTime d3 = new DateTime(1997, 3, 22);
 
             Cliente c1 = new Cliente("João", "Masculino", d1, "029", e1, "joao@email.com", "99900-000", "5555-5555");
-            clientes.Add(c1);
+            pessoas.Add(c1);
             Cliente c2 = new Cliente("Maria", "Feminino", d2, "030", e2, "maria@email.com", "99900-001", "5555-5556");
-            clientes.Add(c2);   
+            pessoas.Add(c2);   
             Cliente c3 = new Cliente("Pedro", "Masculino", d3, "031", e3, "pedro@email.com", "99900-002", "5555-5557"); 
-            clientes.Add(c3);
-
-            foreach (Cliente cliente in clientes)
-            {
-                Console.WriteLine($"Nome: {cliente.getNome()}, {cliente.getCPF()}, {cliente.getSexo()}");
-            }
+            pessoas.Add(c3);
 
 
             Autor a1 = new Autor("Machado de Assis", "Masculino", new DateTime(1839, 6, 21), "Brasileiro"); pessoas.Add(a1);
@@ -69,6 +63,7 @@ namespace OOPproject
                 Console.WriteLine("7 - Encontrar Livro");
                 Console.WriteLine("0 - Sair do Programa");
                 Console.WriteLine();
+                Console.Write("Insira um número: ");
                 int numero = int.Parse(Console.ReadLine());
 
                 switch (numero)
@@ -81,26 +76,30 @@ namespace OOPproject
                         lib1.listarLivros();
                         break;
                     case 2:
-                        Console.WriteLine("Lista de Autores:");
+                        Console.WriteLine("Lista de Autores:\n");
                         foreach (Pessoa p in pessoas)
                         {
                             if(p is Autor)
                             {   
                                 Autor at = (Autor)p;
-                                Console.WriteLine($"Nome do autor: {at.getNome()}, Nacionalidade: {at.getNacionalidade()}.");
-                                
+                                Console.Write($"Nome do Autor: {at.getNome()}\n");
+                                Console.Write($"Data de Nascimento: {at.getDt_nascimento()}\n");
+                                Console.Write($"Nacionalidade: {at.getNacionalidade()}\n\n");
                             }
                         }
                         break;
                     case 3:
-                        Console.WriteLine("Lista de Clientes");
+                        Console.WriteLine("Lista de Clientes: \n");
                         
                             foreach (Pessoa p in pessoas)
                         {
                             if(p is Cliente)
                             {
                                 Cliente cl = (Cliente)p;
-                                Console.WriteLine($"Nome: {cl.getNome()}, {cl.getCPF()}");
+                                Console.Write($"Nome: {cl.getNome()}\n");
+                                Console.Write($"CPF: {cl.getCPF()}\n");
+                                Console.Write($"Data de nascimento: {cl.getDt_nascimento()}\n");
+                                Console.Write($"Email: {cl.getEmail()}\n\n");
                             }
                         }
                         break;
