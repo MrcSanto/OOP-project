@@ -79,8 +79,9 @@ namespace OOPproject
                         Console.WriteLine("Saindo do programa");
                         return;
                     case 1:
-                        Console.WriteLine("Lista de Livros:");
-                        lib1.listarLivros();
+                        Console.WriteLine("Lista de Livros: \n");
+                        Livro li = new Livro();
+                        li.listarLivro(livros);
                         break;
                     case 2:
                         Console.WriteLine("Lista de Autores:\n");
@@ -121,6 +122,12 @@ namespace OOPproject
                     case 6:
                         Cliente c = new Cliente();
                         c.registrar(pessoas);
+                        break;
+                    case 7:
+                        Livro liv = new Livro();
+                        Console.Write("Digite o titulo do livro a ser encontrado: ");
+                        string title = Console.ReadLine();
+                        liv.encontrarLivro(title, livros);
                         break;
                     default:
                         Console.WriteLine("Tente Novamente!");

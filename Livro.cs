@@ -30,6 +30,9 @@ namespace OOPproject
         public Editora getEditora() { return editora; }
         public void setEditora(Editora editora) { this.editora = editora; }
 
+        public int getN_paginas() {  return n_paginas; }
+        public void setN_paginas(int n_paginas) { this.n_paginas= n_paginas; }
+
         public int getDisponiveis() { return disponiveis; }
         public void setDisponiveis(int disponiveis) { this.disponiveis = disponiveis; }
 
@@ -41,21 +44,23 @@ namespace OOPproject
 
         public void addLivro(List<Livro> livros, List<Pessoa> pessoas, List<Editora> editoras)
         {
-            string titulo = ObterEntrada("Digite o título do livro: ");
+            Console.Write("Digite o título do livro: ");
+            string titulo = Console.ReadLine();
+
 
             Console.WriteLine("Escolha o autor pelo número: \n");
-            int count = 1;
+            int count = 0;
             List<Autor> autoresDisponiveis = new List<Autor>();
             foreach(Pessoa p in pessoas)
             {
                 if(p is Autor)
                 {   
                     autoresDisponiveis.Add((Autor)p);
-                    Console.WriteLine($"{count++} -- {p.getNome()}");
+                    Console.WriteLine($"{(count++) + 1} -- {p.getNome()}");
                 }
             }
-            int autIndex = int.Parse(Console.ReadLine());
-            if (autIndex <= 0 || autIndex >= count)
+            int autIndex = int.Parse(Console.ReadLine()) - 1;
+            if (autIndex >= count || autIndex <0)
             {
                 Console.WriteLine($"Selecione o número corrreto: 0 < n < {count}.");
                 return;
@@ -63,28 +68,68 @@ namespace OOPproject
             Autor autor = autoresDisponiveis[autIndex];
 
             Console.WriteLine("Escolha a editora pelo número: \n");
-            count = 1;
+            count = 0;
             foreach(Editora ed in editoras)
             {
-                Console.WriteLine($"{count++} -- {ed.getNomeFantasia()}");
+                Console.WriteLine($"{(count++) + 1} -- {ed.getNomeFantasia()}");
             }
-            int edIndex = int.Parse(Console.ReadLine());
-            if(edIndex <= 0 || edIndex >= count)
+            int edIndex = int.Parse(Console.ReadLine()) - 1;
+            if(edIndex < 0 || edIndex >= count)
             {
                 Console.WriteLine($"Escolha o número correto: 0 < n < {count}");
                 return;
             }
             Editora editora = editoras[edIndex];
-            
-            
-            
+
+            Console.Write("Digite o número de páginas do livro: ");
+            int n_paginas = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite quantos exemplares tem disponíveis: ");
+            int disponiveis = int.Parse(Console.ReadLine());
+
+            Livro addLivro = new Livro(titulo, autor, editora, n_paginas, disponiveis);
+            livros.Add(addLivro);
+
+
         }
 
-        private string ObterEntrada(string mensagem)
+        public void encontrarLivro(string title) { }
+
+        public void encontrarLivro(string titulo, List<Livro> livros)
         {
-            Console.Write(mensagem);
-            return Console.ReadLine();
+            bool encontrado = false;
+            foreach (Livro livro in livros)
+            {
+                if (livro.getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"Titulo: {livro.getTitulo()}");
+                    Console.WriteLine($"Autor: {livro.getAutor().getNome()}");
+                    Console.WriteLine($"Editora: {livro.getEditora().getNomeFantasia()}");
+                    Console.WriteLine($"Numero de páginas: {livro.getN_paginas()}");
+                    Console.WriteLine($"Exemplares: {livro.getDisponiveis()}\n");
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (!encontrado)
+            {
+                Console.WriteLine("Livro não encontrado.");
+            }
         }
+
+        public void listarLivro(List<Livro> livros)
+        {
+            foreach(Livro l in livros)
+            {
+                Console.Write($"Titulo: {l.getTitulo()}\n");
+                Console.Write($"Autor: {l.getAutor().getNome()}\n");
+                Console.Write($"Editora : {l.getEditora().getNomeFantasia()}\n");
+                Console.Write($"Numero de páginas: {l.getN_paginas()}\n");
+                Console.Write($"Exemplares: {l.getDisponiveis()}\n\n");
+            }
+        }
+
 
     }
 }
