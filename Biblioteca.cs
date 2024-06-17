@@ -33,7 +33,6 @@
                 Console.WriteLine($"Livro : {l.getTitulo()}, N° exemplares: {l.getDisponiveis()}.");
             }
         }
-        public void addLivro() { }
         public void encontrarLivro(string nome) { }
     }
 
