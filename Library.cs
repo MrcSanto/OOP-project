@@ -68,6 +68,8 @@ namespace OOPproject
                 Console.WriteLine("5 - Cadastrar Autor");
                 Console.WriteLine("6 - Cadastrar Cliente");
                 Console.WriteLine("7 - Encontrar Livro");
+                Console.WriteLine("8 - Emprestar Livro");
+                Console.WriteLine("9 - Devolver Livro");
                 Console.WriteLine("0 - Sair do Programa");
                 Console.WriteLine();
                 Console.Write("Insira um número: ");
@@ -129,6 +131,12 @@ namespace OOPproject
                         string title = Console.ReadLine();
                         liv.encontrarLivro(title, livros);
                         break;
+                    case 8:
+                        EmprestarLivro(pessoas, livros);
+                        break;
+                    case 9:
+                        DevolverLivro(pessoas, livros);
+                        break;
                     default:
                         Console.WriteLine("Tente Novamente!");
                         break;
@@ -139,6 +147,94 @@ namespace OOPproject
 
         }
 
+        static void EmprestarLivro(List<Pessoa> pessoas, List<Livro> livros)
+        {
+            Console.WriteLine("Escolha o cliente: ");
+            int count = 0;
+            List<Cliente> cliente = new List<Cliente>();
+            foreach(Pessoa p in pessoas)
+            {
+                if(p is Cliente)
+                {
+                    cliente.Add((Cliente)p);
+                    Console.WriteLine($"{(count++) + 1} -- {p.getNome()}");
+                }
+            }
+            int clientIndex = int.Parse( Console.ReadLine() ) - 1;
+            if(clientIndex >= count || clientIndex < 0)
+            {
+                Console.WriteLine($"Selecione o número correto: 0 < n < {count}.");
+                return;
+            }
+            Cliente cl = cliente[clientIndex];
+
+            if(livros.Count == 0)
+            {
+                Console.WriteLine("Biblioteca esta sem livros, volte mais tarde!");
+                return; 
+            }
+
+            Console.WriteLine("Escolha o Livro pelo número: ");
+            count = 0;
+            foreach(Livro l in livros)
+            {
+                Console.WriteLine($"{(count++) + 1} -- {l.getTitulo()} ({l.getDisponiveis()} disponíveis)");
+            }
+            int livroIndex = int.Parse(Console.ReadLine()) - 1;
+            if (livroIndex < 0 || livroIndex >= count)
+            {
+                Console.WriteLine($"Escolha o número correto: 0 < n < {count}");
+                return;
+            }
+            Livro lv = livros[livroIndex];
+
+            cl.emprestarLivro(lv, livros);
+        }
+
+        static void DevolverLivro(List<Pessoa>pessoas, List<Livro> livros) 
+        {
+            Console.WriteLine("Escolha o cliente: ");
+            int count = 0;
+            List<Cliente> cliente = new List<Cliente>();
+            foreach (Pessoa p in pessoas)
+            {
+                if (p is Cliente)
+                {
+                    cliente.Add((Cliente)p);
+                    Console.WriteLine($"{(count++) + 1} -- {p.getNome()}");
+                }
+            }
+            int clientIndex = int.Parse(Console.ReadLine()) - 1;
+            if (clientIndex >= count || clientIndex < 0)
+            {
+                Console.WriteLine($"Selecione o número correto: 0 < n < {count}.");
+                return;
+            }
+            Cliente cl = cliente[clientIndex];
+            if(cl.getLivros_emp().Count == 0) 
+            { 
+                Console.WriteLine($"{cl.getNome()} não tem livros retirados.");
+                return;
+            }
+
+            Console.WriteLine("Escolha o livro a ser devolvido: ");
+            count = 0;
+            foreach (Livro l in cl.getLivros_emp())
+            {
+                Console.WriteLine($"{(count++) + 1} -- {l.getTitulo()}, {l.getDisponiveis()}");
+            }
+            int livroIndex = int.Parse(Console.ReadLine()) - 1;
+            if (livroIndex < 0 || livroIndex >= count)
+            {
+                Console.WriteLine($"Escolha o número correto: 0 < n < {count}");
+                return;
+            }
+            Livro livro = cl.getLivros_emp()[livroIndex];
+
+            cl.devolverLivro(livro, livros);
+        }
     }
+
+
 }
 

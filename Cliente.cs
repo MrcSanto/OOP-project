@@ -11,6 +11,7 @@ namespace OOPproject
         private string email;
         private string CEP;
         private string telefone;
+        private List<Livro> livros_emp = new List<Livro>();
 
         public Cliente() { }
 
@@ -37,6 +38,9 @@ namespace OOPproject
 
         public string getTelefone() { return telefone; }
         public void setTelefone(string telefone) { this.telefone = telefone; }
+
+        public List<Livro> getLivros_emp() { return livros_emp; }
+        public void setLivros_emp(List<Livro> livros_) { this.livros_emp = livros_; }
 
         public override void registrar(List<Pessoa> pessoas)
         {
@@ -75,6 +79,27 @@ namespace OOPproject
                 }
                 Console.WriteLine("Formato de data inválido. Tente novamente.");
             }
+        }
+
+        public void emprestarLivro(Livro livro, List<Livro> livrosDisponiveis)
+        {
+            if (livro.getDisponiveis() > 0)
+            {
+                livro.setDisponiveis(livro.getDisponiveis() - 1); //assumindo que sempre retira-se 1 livro por vez
+                livros_emp.Add(livro);
+                Console.WriteLine($"\nLivro \"{livro.getTitulo()}\" emprestado com sucesso para {getNome()}.\n");
+            }
+            else
+            {
+                Console.WriteLine($"O livro \"{livro.getTitulo()}\" não está disponível para empréstimo.");
+            }
+        }
+
+        public void devolverLivro(Livro livro, List<Livro> livrosDisponiveis)
+        {
+            livro.setDisponiveis(livro.getDisponiveis() + 1);
+            livros_emp.Remove(livro);
+            Console.WriteLine($"Livro \"{livro.getTitulo()}\" devolvido com sucesso por {getNome()}.");
         }
     }
 }   
