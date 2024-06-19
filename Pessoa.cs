@@ -8,6 +8,9 @@ namespace OOPproject
         public string nome;
         public string sexo;
         public DateTime dt_nascimento;
+
+
+        //construtores
         public Pessoa() { }
 
         public Pessoa(string nome, string sexo, DateTime dt_nascimento)
@@ -17,6 +20,7 @@ namespace OOPproject
             this.dt_nascimento = dt_nascimento;
         }
 
+        //getters e setters
         public string getNome() { return nome; }
         public void setNome(string nome) { this.nome = nome; }
 

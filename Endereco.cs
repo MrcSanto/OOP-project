@@ -6,8 +6,8 @@
         private int numero;
         private string bairro;
 
+        //construtores
         public Endereco() { }
-
         public Endereco(string rua, int numero, string bairro)
         {
             this.rua = rua;
@@ -15,6 +15,7 @@
             this.bairro = bairro;
         }
 
+        //getters e setters
         public string getRua() { return rua; }
         public void setRua(string rua) { this.rua = rua; }
         public int getNumero() { return numero; }

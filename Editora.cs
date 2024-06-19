@@ -8,6 +8,7 @@
         private string telefone;
         private string nacionalidade;
 
+        //construtores
         public Editora() { }
 
         public Editora(string razao_social, string nome_fantasia, string cNPJ, string telefone, string nacionalidade)
@@ -19,6 +20,7 @@
             this.nacionalidade = nacionalidade;
         }
 
+        //getters e setters
         public string getRazaoSocial() { return razao_social; }
         public void setRazaoSocial(string razao_social) { this.razao_social = razao_social; }
 

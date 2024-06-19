@@ -13,6 +13,7 @@ namespace OOPproject
         private string telefone;
         private List<Livro> livros_emp = new List<Livro>();
 
+        //construtores
         public Cliente() { }
 
         public Cliente(string nome, string sexo, DateTime dt_nascimento, string cPF, Endereco endereco, string email, string cEP, string telefone) 
@@ -24,6 +25,7 @@ namespace OOPproject
             this.telefone = telefone;
         }
 
+        //getters e setters
         public string getCPF() { return CPF; }
         public void setCPF(string cPF) { this.CPF = cPF; }
 
@@ -81,9 +83,9 @@ namespace OOPproject
             }
         }
 
-        public void emprestarLivro(Livro livro, List<Livro> livrosDisponiveis)
+        public void emprestarLivro(Livro livro, List<Livro> livrosDisponiveis) //funcao para alugar um livro
         {
-            if (livro.getDisponiveis() > 0)
+            if (livro.getDisponiveis() > 1)
             {
                 livro.setDisponiveis(livro.getDisponiveis() - 1); //assumindo que sempre retira-se 1 livro por vez
                 livros_emp.Add(livro);
@@ -95,7 +97,7 @@ namespace OOPproject
             }
         }
 
-        public void devolverLivro(Livro livro, List<Livro> livrosDisponiveis)
+        public void devolverLivro(Livro livro, List<Livro> livrosDisponiveis)//funcao para devolver o livro alugado
         {
             livro.setDisponiveis(livro.getDisponiveis() + 1);
             livros_emp.Remove(livro);

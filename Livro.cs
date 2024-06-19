@@ -5,11 +5,12 @@ namespace OOPproject
     class Livro
     {
         private string titulo;
-        private Autor autor;  //agregação por composição
+        private Autor autor;  //agregação
         private Editora editora; //agregação 
         private int n_paginas;
         private int disponiveis;
 
+        //construtores
         public Livro(string titulo, Autor autor, Editora editora, int n_paginas, int disponiveis)
         {
             this.titulo = titulo;
@@ -21,6 +22,7 @@ namespace OOPproject
 
         public Livro() { }
 
+        //getters e setters
         public string getTitulo() { return titulo; }
         public void setTitulo(string titulo) { this.titulo = titulo; }
 
@@ -89,11 +91,10 @@ namespace OOPproject
 
             Livro addLivro = new Livro(titulo, autor, editora, n_paginas, disponiveis);
             livros.Add(addLivro);
+            autor.addLivro(addLivro);
 
 
         }
-
-        public void encontrarLivro(string title) { }
 
         public void encontrarLivro(string titulo, List<Livro> livros)
         {
@@ -118,17 +119,35 @@ namespace OOPproject
             }
         }
 
-        public void listarLivro(List<Livro> livros)
+        public void listarLivro(List<Livro> livros, List<Pessoa> pessoas)
         {
-            foreach(Livro l in livros)
+            foreach (Pessoa p in pessoas)
             {
-                Console.Write($"Titulo: {l.getTitulo()}\n");
-                Console.Write($"Autor: {l.getAutor().getNome()}\n");
-                Console.Write($"Editora : {l.getEditora().getNomeFantasia()}\n");
-                Console.Write($"Numero de páginas: {l.getN_paginas()}\n");
-                Console.Write($"Exemplares: {l.getDisponiveis()}\n\n");
+                if (p is Autor at)
+                {
+                    Console.WriteLine($"Nome: {at.getNome()}");
+
+                    List<Livro> livrosDoAutor = at.getLivros();
+                    if (livrosDoAutor.Count == 0)
+                    {
+                        Console.WriteLine("Autor sem livros cadastrados.");
+                    }
+                    else
+                    {
+                        foreach (Livro l in livrosDoAutor)
+                        {
+                            Console.Write($"Titulo: {l.getTitulo()}\n");
+                            Console.Write($"Autor: {l.getAutor().getNome()}\n");
+                            Console.Write($"Editora : {l.getEditora().getNomeFantasia()}\n");
+                            Console.Write($"Numero de páginas: {l.getN_paginas()}\n");
+                            Console.Write($"Exemplares: {l.getDisponiveis()}\n\n");
+                        }
+                    }
+                    Console.WriteLine();
+                }
             }
         }
+
 
     }
 }

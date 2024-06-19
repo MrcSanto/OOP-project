@@ -5,8 +5,9 @@ namespace OOPproject;
 class Autor : Pessoa //sintaxe para herdar uma classe
 {
     private string nacionalidade;
-    private List<Livro> livros; // agregação por composição
+    private List<Livro> livros = new List<Livro>(); // agregação por composição
 
+    //construtores       
     public Autor() { }
 
     public Autor(string nome, string sexo, DateTime dt_nascimento, string nacionalidade) : base(nome, sexo, dt_nascimento)
@@ -14,13 +15,19 @@ class Autor : Pessoa //sintaxe para herdar uma classe
         this.nacionalidade = nacionalidade;
     }
 
+    //getters e setters
     public string getNacionalidade() { return nacionalidade; }
     public void setNacionalidade(string nacionalidade) { this.nacionalidade = nacionalidade; }
 
     public List<Livro> getLivros() {  return livros; }
     public void setLivros(List<Livro> livros) { this.livros = livros; }
 
-    public override void registrar(List<Pessoa> pessoas)
+    public void addLivro(Livro l) //funcao para adicionar livro a lista de livros do autor
+    {
+        livros.Add(l);
+    }
+
+    public override void registrar(List<Pessoa> pessoas) //funcao herdada de Pessoa, para registrar ou cadastrar um novo autor.
     {
         setNome(ObterEntrada("Digite o nome do autor: "));
         setSexo(ObterEntrada("Digite o sexo do autor: "));
@@ -30,13 +37,13 @@ class Autor : Pessoa //sintaxe para herdar uma classe
         pessoas.Add(this);
     }
 
-    private string ObterEntrada(string mensagem)
+    private string ObterEntrada(string mensagem) //funcao usada para diminuir o codigo
     {
         Console.Write(mensagem);
         return Console.ReadLine();
-    }
+    } 
 
-    private DateTime ObterDataNascimento(string mensagem)
+    private DateTime ObterDataNascimento(string mensagem) //funcao usada para diminuir o codigo
     {
         DateTime dataNascimento;
         while (true)

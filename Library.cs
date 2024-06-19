@@ -7,10 +7,6 @@ namespace OOPproject
     {
         static void Main(string[] args)
         {
-            
-            List<Livro> Massis = new List<Livro>();
-            List<Livro> Jausten = new List<Livro>();
-            List<Livro> Ltolstoy = new List<Livro>();
             List<Livro> livros = new List<Livro>();
             List<Pessoa> pessoas = new List<Pessoa>();
             List<Editora> editoras = new List<Editora>();
@@ -47,18 +43,20 @@ namespace OOPproject
             editoras.Add(ed3);
 
             Livro l1 = new Livro("Dom Casmurro", a1, ed1, 300, 10);
-            Massis.Add(l1);
+            Livro l4 = new Livro("Memorias Póstumas de Brás Cubas", a1, ed2, 250, 2);
+            a1.addLivro(l1);
+            a1.addLivro (l4);
             livros.Add(l1);
+            livros.Add (l4);
             Livro l2 = new Livro("Orgulho e Preconceito", a2, ed2, 350, 8);
-            Jausten.Add(l2);
+            a2.addLivro(l2);
             livros.Add(l2);
             Livro l3 = new Livro("Guerra e Paz", a3, ed3, 1200, 5);
-            Ltolstoy.Add(l3);
-            livros.Add(l3);  
+            a3.addLivro(l3);
+            livros.Add(l3);
 
-            Biblioteca lib1 = new Biblioteca("Biblioteca Municipal de Passo Fundo", e3, livros);
+            Console.WriteLine("Bem vindo a Biblioteca do Giuliano");
 
-            Console.WriteLine($"Bem vindo a {lib1.getNome()}!");
             while (true)
             {
                 Console.WriteLine("1 - Listar Livros");
@@ -83,7 +81,7 @@ namespace OOPproject
                     case 1:
                         Console.WriteLine("Lista de Livros: \n");
                         Livro li = new Livro();
-                        li.listarLivro(livros);
+                        li.listarLivro(livros, pessoas);
                         break;
                     case 2:
                         Console.WriteLine("Lista de Autores:\n");
@@ -147,7 +145,7 @@ namespace OOPproject
 
         }
 
-        static void EmprestarLivro(List<Pessoa> pessoas, List<Livro> livros)
+        static void EmprestarLivro(List<Pessoa> pessoas, List<Livro> livros) //lógiaca para implementar a funcao EmprestarLivro
         {
             Console.WriteLine("Escolha o cliente: ");
             int count = 0;
@@ -191,7 +189,7 @@ namespace OOPproject
             cl.emprestarLivro(lv, livros);
         }
 
-        static void DevolverLivro(List<Pessoa>pessoas, List<Livro> livros) 
+        static void DevolverLivro(List<Pessoa>pessoas, List<Livro> livros) //lógica para implementar a funcao de DevolverLivro
         {
             Console.WriteLine("Escolha o cliente: ");
             int count = 0;
@@ -221,7 +219,7 @@ namespace OOPproject
             count = 0;
             foreach (Livro l in cl.getLivros_emp())
             {
-                Console.WriteLine($"{(count++) + 1} -- {l.getTitulo()}, {l.getDisponiveis()}");
+                Console.WriteLine($"{(count++) + 1} -- {l.getTitulo()}");
             }
             int livroIndex = int.Parse(Console.ReadLine()) - 1;
             if (livroIndex < 0 || livroIndex >= count)
