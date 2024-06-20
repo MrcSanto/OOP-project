@@ -44,7 +44,7 @@ namespace OOPproject
         public List<Livro> getLivros_emp() { return livros_emp; }
         public void setLivros_emp(List<Livro> livros_) { this.livros_emp = livros_; }
 
-        public override void registrar(List<Pessoa> pessoas)
+        public override void registrar(List<Pessoa> pessoas) //polimorfismo por substituicao
         {
             setNome(ObterEntrada("Digite o nome do cliente: "));
             setSexo(ObterEntrada("Digite o sexo do cliente: "));

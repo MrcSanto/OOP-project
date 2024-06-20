@@ -28,7 +28,7 @@ class Autor : Pessoa //sintaxe para herdar uma classe
     }
 
     public override void registrar(List<Pessoa> pessoas) //funcao herdada de Pessoa, para registrar ou cadastrar um novo autor.
-    {
+    {//polimorfismo por substituicao
         setNome(ObterEntrada("Digite o nome do autor: "));
         setSexo(ObterEntrada("Digite o sexo do autor: "));
         setDt_nascimento(ObterDataNascimento("Digite a data de nascimento do autor (dd/MM/yyyy):"));
